@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Festers PickEm!</title>
+	<link rel="stylesheet"  href="http://www.fancytechno.com/pickem/jquery.mobile.css" />
+	<link rel="stylesheet"  href="http://www.fancytechno.com/pickem/ui.jqgrid-mobile.css" />
+	<script language="javascript" src="http://www.fancytechno.com/pickem/jquery.min.js"></script>
+	<script language="javascript" src="http://www.fancytechno.com/pickem/jquerymobile.jqGrid.min.js" id="s1"></script>
+	<script language="javascript" src="http://www.fancytechno.com/pickem/grid.locale-en.js"></script>
+	<script src="http://www.fancytechno.com/pickem/jquery.mobile.js"></script>
+        <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <title>jqGrid Loading Data - JSON</title>
+</head>
+<body>
+    <div style="margin-left:20px; margin-right:20px">
+        <table id="jqGrid"></table>
+    </div>
+
+    <script type="text/javascript">
+
+var week = 1;
+var value = "<%=_SESSION['uName'] %>";
+var session;
+
+$(document).ready(function () {
+
+		$("#jqGrid").jqGrid({
+		url: 'getGamesData.php',
+		datatype: "json",
+		 colModel: [
+			{ label: 'Date', name: 'GAME_TIME', width: 50 },
+			{ label: 'Game_ID', name: 'ID', hidden: true},
+			{ label: 'Visiting Team', name: 'VISITOR_TEAM', width: 75},
+			{ label: 'Home Team', name: 'HOME_TEAM', width: 75},
+			{ label: 'Pick', name: 'Pick', width: 75}                 
+		],
+		"jsonReader":{"repeatitems":false,"subgrid":{"repeatitems":false}},
+                gridview: true,
+		height: 500,
+                autowidth: true,
+		onCellSelect: function(rowId, iCol, cellContent, e){
+			
+			$("#jqGrid").jqGrid('setCell', rowId, 4, cellContent);
+		}
+	});
+
+    $('#submit').click(function(e){
+        var gridData = jQuery("#jqGrid").getRowData();
+        var postData = JSON.stringify(gridData);
+        var Success = false;
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'sendPick.php',
+            data: {my_json_data: postData},
+            success: function(data){
+                callBackFunction(data);
+        },
+            error: function(textStatus, errorThrown){
+                callBackFunction(textStatus + " " + errorThrown);
+            }
+        });
+        //alert("JSON serialized jqGrid data:n" + postData);
+    });
+
+    function callBackFunction(data){
+        if(data.startsWith("Array")){
+            alert("Picks Submitted!");
+        }
+        else {
+            alert(data);
+        }
+    }
+
+	
+});
+
+ </script>
+<div style="margin: 20px 20px 50px;">
+<input class="btn btn-primary btn-lg btn-block" id="submit" type="submit" value="Submit">
+</div>
+ </body>
+ </html>
+ 
