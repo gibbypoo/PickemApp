@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="28552910-9777-4933-b1fe-1d985f2e115b" name="FancyTechno" url="http://ftp.fancytechno.com">
+        <fileTransfer port="0" accessType="LOCAL" />
+      </webServer>
+      <webServer id="3b3bfd21-0a52-42b0-9fac-8edfc0f9acf4" name="FancyTechno (1)" url="http://ftp.fancytechno.com">
+        <fileTransfer host="ftp.fancytechno.com" port="21" rootFolder="/public_html/" password="dffedfcbdfccdf9bdf9ddf93df99dfc5dfc4dfcfdf8b" username="fanclwpc">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

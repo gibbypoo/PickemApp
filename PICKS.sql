@@ -1,0 +1,42 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Aug 09, 2016 at 01:43 PM
+-- Server version: 5.5.32-cll-lve
+-- PHP Version: 5.4.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `fanclwpc_pickem`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PICKS`
+--
+
+CREATE TABLE IF NOT EXISTS `PICKS` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `GAMES` int(11) DEFAULT NULL,
+  `USER` int(11) DEFAULT NULL,
+  `PICKED_TEAM` int(11) DEFAULT NULL,
+  UNIQUE KEY `ID` (`ID`),
+  KEY `fk_GAMES` (`GAMES`),
+  KEY `fk_USER` (`USER`),
+  KEY `fk_PICKED_TEAM` (`PICKED_TEAM`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
